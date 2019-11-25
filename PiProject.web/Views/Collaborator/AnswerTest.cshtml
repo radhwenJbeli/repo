@@ -1,0 +1,19 @@
+﻿@model PiProject.web.Models.Question
+@{
+    ViewBag.Title = "AnswerTest";
+}
+
+<h2> answer the test </h2>
+
+@using (Html.BeginForm("NextQuestion","Collaborator"))
+{
+	<p> @Model.Content</p>
+
+
+	foreach (var r in Model.PossibleResponses)
+	{
+		@Html.RadioButtonFor(model => model.chosenRep, r.ID) @r.Content <br />
+	}
+	<input type="submit" value="NextQuestion" class="btn btn-default" />
+	//@Html.ActionLink("NextQuestion", "NextQuestion")
+}
