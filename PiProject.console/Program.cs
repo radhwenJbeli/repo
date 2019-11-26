@@ -21,7 +21,7 @@ namespace PiProject.console
 			*/
 
 			CollaboratorService sr = new CollaboratorService();
-			sr.test(13);
+			sr.VerfyCredentials("zz", "zz");
 		
 
 		}

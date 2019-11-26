@@ -9,6 +9,6 @@ namespace PiProject.service
 {
 	public interface ICollaboratorService
 	{
-		IEnumerable<t_evaluationtest> DisplayTests(int idcollaborator, string type);
+		IEnumerable<t_evaluationtest> DisplayTests(t_collaborator collaborator, string type);
 	}
 }

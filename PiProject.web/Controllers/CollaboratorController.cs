@@ -15,6 +15,8 @@ namespace PiProject.web.Controllers.collaborator
 		private CollaboratorService _sr;
 
 
+		//logger 
+		private static t_collaborator logger; 
 
 		//data for preparing the questions and responses of a test 
 		private static int IndexQuestion = 0;
@@ -39,15 +41,21 @@ namespace PiProject.web.Controllers.collaborator
 
 		public ActionResult Dashboard()
 		{
+
+			Getlogger();	
 			return View();
 		}
 
-
+		[NonAction]
+		public void Getlogger()
+		{
+			 logger = (t_collaborator)Session["logger"];
+		}
 
 
 		public ActionResult AutoTests()
 		{
-			IEnumerable<t_evaluationtest> list =  _sr.DisplayTests(15, "Auto");
+			IEnumerable<t_evaluationtest> list =  _sr.DisplayTests(logger, "Auto");
 			 RenderList = new List<TestToRender>();
 
 			TestToRender render;
@@ -102,7 +110,7 @@ namespace PiProject.web.Controllers.collaborator
 
 		public ActionResult Tests360()
 		{
-			_sr.DisplayTests(15, "360");
+			_sr.DisplayTests(logger, "360");
 
 			return null;
 		}

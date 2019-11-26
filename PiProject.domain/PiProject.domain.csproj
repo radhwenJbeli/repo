@@ -81,6 +81,7 @@
     <Compile Include="entities\t_testtype.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="serviceEntities\AnswerObject.cs" />
+    <Compile Include="serviceEntities\CollaboratorSr.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
