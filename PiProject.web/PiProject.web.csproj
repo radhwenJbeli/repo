@@ -295,6 +295,7 @@
     <Content Include="Views\Collaborator\AnswerTest.cshtml" />
     <Content Include="Views\Collaborator\NextQuestion.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Collaborator\InfosOfAnswers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

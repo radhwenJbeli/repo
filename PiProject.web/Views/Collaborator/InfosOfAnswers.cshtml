@@ -1,0 +1,13 @@
+﻿@using PiProject.web.Models.Collaborator
+@{
+    ViewBag.Title = "InfosOfAnswers";
+}
+
+<h2>InfosOfAnswers</h2>
+<p>@ViewData["infos"] </p>
+@foreach(var inf in ViewData["infos"] as Dictionary<Question,PossibleResponse>)
+{
+	<p> @inf.Key.Content</p>
+	<p> @inf.Value.ID</p>
+}
+

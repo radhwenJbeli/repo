@@ -43,27 +43,29 @@ namespace PiProject.service
 				//check if manager or developper
 				if (res.is_Manager)
 				{
-					logger = _context.t_collaborator.Include("t_manager")
-						.Include("t_manager.t_evaluationtest")
+					logger = _context.t_collaborator
+						//.Include("t_manager")
+						//.Include("t_manager.t_evaluationtest")
 						.FirstOrDefault(m => m.C_ID == res.C_ID);
 					return logger;
 					
 				}
 				if (res.is_Developper)
 				{
-					logger = _context.t_collaborator.Include("t_developper")
-							.Include("t_evaluationtargetaffectation")
-							.Include("t_evaluationtargetaffectation.t_evaluationtest")
-							.Include("t_evaluationtargetaffectation.t_evaluationtest.t_criteria")
-							.Include("t_evaluationtargetaffectation.t_evaluationtest.t_criteria.t_possibleresponse")
+					 
+					 logger = _context.t_collaborator.Include("t_developper")
+						//	.Include("t_evaluationtargetaffectation")
+						//	.Include("t_evaluationtargetaffectation.t_evaluationtest")
+						//	.Include("t_evaluationtargetaffectation.t_evaluationtest.t_criteria")
+						//	.Include("t_evaluationtargetaffectation.t_evaluationtest.t_criteria.t_possibleresponse")
 
-							.Include("t_evaluationguestaffectation")
-							.Include("t_evaluationguestaffectation.t_evaluationtest")
-							.Include("t_evaluationguestaffectation.t_evaluationtest.t_criteria")
-							.Include("t_evaluationguestaffectation.t_evaluationtest.t_criteria.t_possibleresponse")
+						//	.Include("t_evaluationguestaffectation")
+						//	.Include("t_evaluationguestaffectation.t_evaluationtest")
+						//	.Include("t_evaluationguestaffectation.t_evaluationtest.t_criteria")
+						//	.Include("t_evaluationguestaffectation.t_evaluationtest.t_criteria.t_possibleresponse")
 
-							.Include("t_performancenote")
-							.FirstOrDefault(m => m.C_ID == res.C_ID);
+						//	.Include("t_performancenote")
+							.FirstOrDefault(d => d.C_ID == res.C_ID);
 					return logger;
 					
 				}
@@ -84,14 +86,14 @@ namespace PiProject.service
 							.Include("t_evaluationtargetaffectation.t_evaluationtest.t_criteria.t_possibleresponse")
 							.Where<t_collaborator>(c => c.C_ID == idcollaborator).FirstOrDefault();
 */
-			IEnumerable<t_evaluationtargetaffectation> affecatations = collaborator.t_evaluationtargetaffectation;
+			IEnumerable<t_evaluationguestaffectation> affecatations = collaborator.t_evaluationguestaffectation;
 
 			List<t_evaluationtest> tests = new List<t_evaluationtest>();
 
 			if (type.Equals("Auto"))
 			{
 
-				foreach (t_evaluationtargetaffectation aff in affecatations)
+				foreach (t_evaluationguestaffectation aff in affecatations)
 				{
 					if (aff.t_evaluationtest.ET_Type.Equals("AutoEvaluation"))
 					{
@@ -99,12 +101,14 @@ namespace PiProject.service
 					}
 				}
 			}
+
+			IEnumerable<t_evaluationguestaffectation> invitations = collaborator.t_evaluationguestaffectation; 
 			if (type.Equals("360"))
 			{
 
-				foreach (t_evaluationtargetaffectation aff in affecatations)
+				foreach (t_evaluationguestaffectation aff in invitations)
 				{
-					if (aff.t_evaluationtest.ET_Type.Equals("AutoEvaluation"))
+					if (aff.t_evaluationtest.ET_Type.Equals("PersonalEvaluation"))
 					{
 						tests.Add(aff.t_evaluationtest);
 					}

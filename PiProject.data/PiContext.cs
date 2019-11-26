@@ -14,7 +14,7 @@ namespace PiProject.data
 		}
 
 		public virtual DbSet<C__migrationhistory> C__migrationhistory { get; set; }
-		public virtual DbSet<t_answerobject> t_answerobject { get; set; }
+		public virtual DbSet<AnswerAffectation> t_answerobject { get; set; }
 		public virtual DbSet<t_answertestaffectation> t_answertestaffectation { get; set; }
 		public virtual DbSet<t_collaborator> t_collaborator { get; set; }
 		public virtual DbSet<t_criteria> t_criteria { get; set; }

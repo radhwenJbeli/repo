@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace PiProject.web.Models
+namespace PiProject.web.Models.Collaborator
 {
 	public class PossibleResponse
 	{
@@ -12,7 +12,7 @@ namespace PiProject.web.Models
 		public string Description { get; set; }
 
 		public int? Score { get; set; }
-
+		// ok
 		
 	}
 }

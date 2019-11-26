@@ -12,7 +12,7 @@ namespace PiProject.data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public t_answertestaffectation()
         {
-            t_answerobject = new HashSet<t_answerobject>();
+            t_answerobject = new HashSet<AnswerAffectation>();
         }
 
         [Key]
@@ -35,7 +35,7 @@ namespace PiProject.data
         public int? feedback_F_ID { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<t_answerobject> t_answerobject { get; set; }
+        public virtual ICollection<AnswerAffectation> t_answerobject { get; set; }
 
         public virtual t_feedback t_feedback { get; set; }
 

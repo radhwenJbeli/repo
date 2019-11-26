@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 
-namespace PiProject.web.Models
+namespace PiProject.web.Models.Collaborator
 {
 	public class Question 
 	{

@@ -1,6 +1,6 @@
 ﻿using PiProject.data;
 using PiProject.service;
-using PiProject.web.Models;
+using PiProject.web.Models.Collaborator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +21,12 @@ namespace PiProject.web.Controllers.collaborator
 		//data for preparing the questions and responses of a test 
 		private static int IndexQuestion = 0;
 		private static List<TestToRender> RenderList ;
-		private static TestToRender TestToAnswer;
+		
 		private static Question question;
+
+		//data to use when persisting the answers 
+		private static TestToRender TestToAnswer;
+		private static Dictionary<Question, PossibleResponse> mapAnswers;
 
 		public CollaboratorController()
 		{
@@ -110,17 +114,67 @@ namespace PiProject.web.Controllers.collaborator
 
 		public ActionResult Tests360()
 		{
-			_sr.DisplayTests(logger, "360");
+			IEnumerable<t_evaluationtest> list = _sr.DisplayTests(logger, "360");
+			RenderList = new List<TestToRender>();
 
-			return null;
+
+			TestToRender render;
+			Question question;
+			PossibleResponse response;
+
+			foreach (t_evaluationtest test in list)
+			{
+				render = new TestToRender();
+				render.ID = test.ET_ID;
+				render.Type = test.ET_Type;
+				render.tType = test.Et_tType;
+				render.globaloNoteSoFar = test.globaloNoteSoFar;
+
+				render.questions = new List<Question>();
+
+				//add the questions 
+				foreach (t_criteria c in test.t_criteria)
+				{
+					question = new Question();
+					question.ID = c.Cr_ID;
+					question.coefficient = c.Cr_coefficient;
+					question.Content = c.Cr_Content;
+
+					question.PossibleResponses = new List<PossibleResponse>();
+
+					//add the responses of each question
+					foreach (t_possibleresponse rep in c.t_possibleresponse)
+					{
+
+
+						response = new PossibleResponse();
+						response.ID = rep.Pr_ID;
+						response.Content = rep.Pr_Content;
+						response.Score = rep.Pr_score;
+
+						question.PossibleResponses.Add(response);
+					}
+
+
+					render.questions.Add(question);
+
+				}
+				RenderList.Add(render);
+			}
+			RenderTestList model = new RenderTestList();
+			model.TestsList = RenderList;
+
+			return View(model);
+
+			
 		}
 
 
 
 		public ActionResult AnswerTest( int id )
 		{
-			
-
+			//inititalize the index of the questions
+			IndexQuestion = 0;
 			//get the test chosen
 			TestToAnswer = new TestToRender();
 			foreach (TestToRender test in RenderList)
@@ -130,6 +184,11 @@ namespace PiProject.web.Controllers.collaborator
 					TestToAnswer = test;
 				}
 			}
+
+			//initialize the map answers 
+			mapAnswers = new Dictionary<Question, PossibleResponse>();
+
+
 
 			//prepare the first question of the test to be rendered to the view 
 			//, we use the static indexquestion defined above
@@ -165,6 +224,12 @@ namespace PiProject.web.Controllers.collaborator
 			// get the response 
 	
 			var chosenRep = frm["chosenRep"].ToString();
+			PossibleResponse res = new PossibleResponse();
+			res.ID = Convert.ToInt32(chosenRep);
+
+			//add the responses to 
+			mapAnswers.Add(question, res);
+
 
 			IndexQuestion++;
 			var model = PrepareNextQuestion(IndexQuestion);
@@ -174,7 +239,8 @@ namespace PiProject.web.Controllers.collaborator
 			else
 			{
 				ViewBag.error = "there is no other question";
-				return View();
+				return RedirectToAction("InfosOfAnswers", "Collaborator", null);
+				//return View();
 			}
 		}
 
@@ -188,6 +254,12 @@ namespace PiProject.web.Controllers.collaborator
 				return question;
 			}
 			return null;
+		}
+
+		public ActionResult InfosOfAnswers()
+		{
+			ViewData["infos"] = mapAnswers; 
+			return View();
 		}
 	}
 }

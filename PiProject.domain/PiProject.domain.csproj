@@ -80,8 +80,10 @@
     <Compile Include="entities\t_possibleresponse.cs" />
     <Compile Include="entities\t_testtype.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="serviceEntities\AnswerAffectation.cs" />
     <Compile Include="serviceEntities\AnswerObject.cs" />
     <Compile Include="serviceEntities\CollaboratorSr.cs" />
+    <Compile Include="serviceEntities\Feedback360.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

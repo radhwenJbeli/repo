@@ -1,7 +1,15 @@
-﻿
+﻿@model PiProject.web.Models.Collaborator.RenderTestList
+
 @{
-    ViewBag.Title = "Tests360";
+	ViewBag.Title = "AutoTests";
 }
 
-<h2>Tests360</h2>
+<h2>AutoTests</h2>
+
+@foreach (var test in Model.TestsList)
+{
+	<p> @test.ID</p>
+	@Html.ActionLink("Answer", "AnswerTest", new { id = test.ID })
+
+}
 
