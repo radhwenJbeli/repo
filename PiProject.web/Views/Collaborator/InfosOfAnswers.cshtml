@@ -1,13 +1,25 @@
 ﻿@using PiProject.web.Models.Collaborator
+@using PiProject.domain.entities
 @{
     ViewBag.Title = "InfosOfAnswers";
 }
 
+
+
+
 <h2>InfosOfAnswers</h2>
-<p>@ViewData["infos"] </p>
+
+
+<p> vos réponses aux test @ViewData["test"] </p>
 @foreach(var inf in ViewData["infos"] as Dictionary<Question,PossibleResponse>)
 {
+	
 	<p> @inf.Key.Content</p>
 	<p> @inf.Value.ID</p>
 }
 
+@ViewBag.logger
+
+@Html.ActionLink("confirm answers", "ConfirmAnswers")
+<p></p>
+@Html.ActionLink("abandon answers", "AbandonAnswers")

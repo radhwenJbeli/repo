@@ -13,6 +13,7 @@ namespace PiProject.web.Controllers.collaborator
     public class CollaboratorController : Controller
     {
 		private CollaboratorService _sr;
+		private AnswerWebService _an; 
 
 
 		//logger 
@@ -31,6 +32,7 @@ namespace PiProject.web.Controllers.collaborator
 		public CollaboratorController()
 		{
 			this._sr = new CollaboratorService();
+			this._an = new AnswerWebService();
 		}
 
 
@@ -239,9 +241,37 @@ namespace PiProject.web.Controllers.collaborator
 			else
 			{
 				ViewBag.error = "there is no other question";
+				ViewData["test"] = TestToAnswer.Description;
+
 				return RedirectToAction("InfosOfAnswers", "Collaborator", null);
 				//return View();
 			}
+		}
+
+		public ActionResult ConfirmAnswers()
+		{
+			// verify if a feedback is exisisting  , and if its a bad one 
+
+			// get the answers from the map 
+		
+			// get the test the subject of answer 
+			// persist in the database 
+			_an.AddTestAnswerAff(logger.C_ID, TestToAnswer.ID);
+			foreach (var e in mapAnswers)
+			{
+				_an.AddAnswerToAff(logger.C_ID, TestToAnswer.ID, e.Key.ID, e.Value.ID); 
+			}
+
+			// get the target of this test 
+			// verfiy for possible warnings
+
+			return RedirectToAction("Dashboard", "Collaborator", null);
+
+		}
+		public ActionResult AbandonAnswers()
+		{
+			//initialize variables
+			return RedirectToAction("Dashboard", "Collaborator", null);
 		}
 
 		[NonAction]
@@ -258,7 +288,8 @@ namespace PiProject.web.Controllers.collaborator
 
 		public ActionResult InfosOfAnswers()
 		{
-			ViewData["infos"] = mapAnswers; 
+			ViewData["infos"] = mapAnswers;
+			ViewBag.logger = logger.C_ID; 
 			return View();
 		}
 	}

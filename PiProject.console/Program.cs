@@ -28,7 +28,7 @@ namespace PiProject.console
 
 			// 1 ) test service add testanswer affectation
 
-		/*	AnswerAffectation r = new AnswerAffectation();
+			AnswerAffectation r = new AnswerAffectation();
 			r.idCollaborator = 15;
 			r.idEvaluationTest = 13;
 
@@ -38,7 +38,7 @@ namespace PiProject.console
 			var res = client.PostAsJsonAsync<AnswerAffectation>("api/answer/AddAnswerAff", r).ContinueWith((posttrack) => posttrack.Result.EnsureSuccessStatusCode()).Result;
 			
 			var resy = res.Content;
-*/
+
 			// 2) test service add answers to the affectation 
 			/*	AnswerObject answer = new AnswerObject();
 				answer.idCollaborator = 15;
@@ -55,7 +55,7 @@ namespace PiProject.console
 
 			// 3 ) add feedback
 			
-			Feedback360 feedback = new Feedback360();
+			/*Feedback360 feedback = new Feedback360();
 			feedback.idCollaboratorAffectedTo = 15;
 			feedback.idEvaluationTestAffectedTo = 13;
 			feedback.content = "content";
@@ -65,7 +65,7 @@ namespace PiProject.console
 
 			var res = client.PostAsJsonAsync<Feedback360>("api/answer/AddFeedback", feedback).ContinueWith((posttrack) => posttrack.Result.EnsureSuccessStatusCode()).Result;
 			var resy = res.Content;
-			
+			*/
 
 
 		}
