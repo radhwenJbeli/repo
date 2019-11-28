@@ -7,7 +7,7 @@ namespace PiProject.data
     using System.Data.Entity.Spatial;
 
     [Table("pi.t_answerobject")]
-    public partial class AnswerAffectation
+    public partial class t_answerobject
     {
         [Key]
         public int A_ObjectID { get; set; }

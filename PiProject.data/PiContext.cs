@@ -14,7 +14,7 @@ namespace PiProject.data
 		}
 
 		public virtual DbSet<C__migrationhistory> C__migrationhistory { get; set; }
-		public virtual DbSet<AnswerAffectation> t_answerobject { get; set; }
+		public virtual DbSet<t_answerobject> t_answerobject { get; set; }
 		public virtual DbSet<t_answertestaffectation> t_answertestaffectation { get; set; }
 		public virtual DbSet<t_collaborator> t_collaborator { get; set; }
 		public virtual DbSet<t_criteria> t_criteria { get; set; }
@@ -27,14 +27,22 @@ namespace PiProject.data
 		public virtual DbSet<t_performancenote> t_performancenote { get; set; }
 		public virtual DbSet<t_possibleresponse> t_possibleresponse { get; set; }
 		public virtual DbSet<t_testtype> t_testtype { get; set; }
-		
+		//public virtual DbSet<t_notification> t_notification { get; set; }
+		public virtual DbSet<t_notif> t_notif { get; set; }
+		public virtual DbSet<Warning> t_warning { get; set; }
+		public virtual DbSet<t_ranking> t_ranking { get; set; }
+
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			modelBuilder.Entity<C__migrationhistory>()
 				.Property(e => e.MigrationId)
 				.IsUnicode(false);
-
+			/*modelBuilder.Entity<t_notification>()
+				.HasRequired<t_collaborator>(n => n.target)
+				.WithMany(c => c.notifacations)
+				.HasForeignKey<int>(n => n.targetId); 
+				*/
 			modelBuilder.Entity<C__migrationhistory>()
 				.Property(e => e.ContextKey)
 				.IsUnicode(false);
@@ -89,11 +97,14 @@ namespace PiProject.data
 				.HasForeignKey(e => e.idCollaborator)
 				.WillCascadeOnDelete(false);
 
-			modelBuilder.Entity<t_collaborator>()
-				.HasMany(e => e.t_performancenote)
-				.WithOptional(e => e.t_collaborator)
-				.HasForeignKey(e => e.collaborator_C_ID);
+			
+				
 
+				modelBuilder.Entity<t_collaborator>()
+					.HasMany(e => e.t_performancenote)
+					.WithOptional(e => e.t_collaborator)
+					.HasForeignKey(e => e.collaborator_C_ID);
+	
 			modelBuilder.Entity<t_collaborator>()
 				.HasMany(e => e.t_evaluationguestaffectation)
 				.WithRequired(e => e.t_collaborator)

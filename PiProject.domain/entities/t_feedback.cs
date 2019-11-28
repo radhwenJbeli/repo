@@ -24,7 +24,9 @@ namespace PiProject.data
         [StringLength(255)]
         public string F_content { get; set; }
 
-        public int? idCollab { get; set; }
+		public Boolean isBad { get; set; }
+
+		public int? idCollab { get; set; }
 
         public int? idEval { get; set; }
 

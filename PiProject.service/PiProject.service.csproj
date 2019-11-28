@@ -69,6 +69,7 @@
     <Compile Include="CollaboratorService.cs" />
     <Compile Include="IAnswerWebService.cs" />
     <Compile Include="ICollaboratorService.cs" />
+    <Compile Include="PiServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestService.cs" />
   </ItemGroup>

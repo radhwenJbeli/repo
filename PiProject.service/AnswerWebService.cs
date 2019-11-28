@@ -33,6 +33,7 @@ namespace PiProject.service
 			feedback.idCollaboratorAffectedTo = idCollaborator;
 			feedback.idEvaluationTestAffectedTo = idEvaluationTest;
 			feedback.content = "content";
+			feedback.isBad = true;
 
 			HttpClient client = new HttpClient();
 			client.BaseAddress = new Uri("http://localhost:8080/PiProject-web/");

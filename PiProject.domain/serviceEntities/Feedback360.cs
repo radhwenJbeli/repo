@@ -11,5 +11,6 @@ namespace PiProject.domain.serviceEntities
 		public int idCollaboratorAffectedTo { get; set; }
 		public int idEvaluationTestAffectedTo { get; set; }
 		public string content { get; set; }
+		public Boolean isBad { get; set; }
 	}
 }

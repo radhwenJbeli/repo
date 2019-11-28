@@ -16,7 +16,48 @@ namespace PiProject.service
 		private PiContext _picontext;
 		public TestService()
 		{
-			_picontext = new PiContext();	
+			_picontext = new PiContext();
+			_picontext.Database.Initialize(force: false);
+		}
+
+
+
+		public void TestRelation()
+		{
+				t_collaborator collab = _picontext.t_collaborator
+										.Include("superViser")
+										.Include("t_answertestaffectation")
+										.Include("t_answertestaffectation.t_feedback")
+										.Include("superViser.t_collaborator")
+										.Include("notifacations")
+										.Include("notifacations.Relatedwarning")
+									
+										.Include("warnings")
+
+										.Where<t_collaborator>(c => c.C_ID == 13)
+										.FirstOrDefault();
+		ICollection	<t_performancenote> notes = collab.t_performancenote
+												
+				
+												.ToList();
+
+			//obligatoire
+			foreach(t_performancenote note in notes)
+			{
+				var e = note.rank;
+			}
+			//
+			ICollection<Warning> warnings = collab.warnings.ToList();
+			ICollection<t_notif> notif = collab.notifacations.ToList();
+
+		
+			
+			 //ICollection<Warning> e = _picontext.t_warning.ToList<Warning>();
+
+		/*	ICollection<t_performancenote> t = _picontext.t_performancenote
+											.Include("t_collaborator")
+										.ToList<t_performancenote>();
+		*/	
 		}
 
 		public TestWrapper addTestAnswerAff()
