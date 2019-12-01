@@ -1,5 +1,7 @@
 ﻿@using PiProject.web.Models.Collaborator
 @using PiProject.domain.entities
+@model PiProject.web.Models.Collaborator.TestToRender
+
 @{
     ViewBag.Title = "InfosOfAnswers";
 }
@@ -19,6 +21,10 @@
 }
 
 @ViewBag.logger
+@if (Model.Type.Equals("PersonalEvaluation"))
+{
+	@Html.ActionLink("you want to add feedback ?", "AddFeedback")
+}
 
 @Html.ActionLink("confirm answers", "ConfirmAnswers")
 <p></p>

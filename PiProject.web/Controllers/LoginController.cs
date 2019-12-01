@@ -31,7 +31,7 @@ namespace PiProject.web.Controllers
 			Session["logger"] = logger;
 
 			if (logger.t_manager != null)
-				return RedirectToAction("Index", "Manager", null);
+				return RedirectToAction("Dashboard", "Manager", null);
 			if (logger.t_developper != null) 
 				return RedirectToAction("Dashboard", "Collaborator", null);
 			

@@ -20,7 +20,8 @@ namespace PiProject.domain.entities
 		public string Content { get; set; }
 		public int is_Confirmed { get; set; }
 
-		public WarningGravity warningGravity { get; set; }
+		
+		public Gravity gravity { get; set; }
 
 		[ForeignKey("collab")]
 		public int? ToWarnId { get; set; }

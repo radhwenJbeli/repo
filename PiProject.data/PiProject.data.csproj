@@ -168,6 +168,34 @@
     <Compile Include="Migrations\201911282136561_ze.Designer.cs">
       <DependentUpon>201911282136561_ze.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911291130537_cxvb.cs" />
+    <Compile Include="Migrations\201911291130537_cxvb.Designer.cs">
+      <DependentUpon>201911291130537_cxvb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911291132330_ghj.cs" />
+    <Compile Include="Migrations\201911291132330_ghj.Designer.cs">
+      <DependentUpon>201911291132330_ghj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911291134163_ghgj.cs" />
+    <Compile Include="Migrations\201911291134163_ghgj.Designer.cs">
+      <DependentUpon>201911291134163_ghgj.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911291213589_bnc.cs" />
+    <Compile Include="Migrations\201911291213589_bnc.Designer.cs">
+      <DependentUpon>201911291213589_bnc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912011856199_yuii.cs" />
+    <Compile Include="Migrations\201912011856199_yuii.Designer.cs">
+      <DependentUpon>201912011856199_yuii.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912011857432_gjlf.cs" />
+    <Compile Include="Migrations\201912011857432_gjlf.Designer.cs">
+      <DependentUpon>201912011857432_gjlf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201912011917108_right.cs" />
+    <Compile Include="Migrations\201912011917108_right.Designer.cs">
+      <DependentUpon>201912011917108_right.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PiContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -257,6 +285,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911282136561_ze.resx">
       <DependentUpon>201911282136561_ze.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911291130537_cxvb.resx">
+      <DependentUpon>201911291130537_cxvb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911291132330_ghj.resx">
+      <DependentUpon>201911291132330_ghj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911291134163_ghgj.resx">
+      <DependentUpon>201911291134163_ghgj.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911291213589_bnc.resx">
+      <DependentUpon>201911291213589_bnc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912011856199_yuii.resx">
+      <DependentUpon>201912011856199_yuii.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912011857432_gjlf.resx">
+      <DependentUpon>201912011857432_gjlf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912011917108_right.resx">
+      <DependentUpon>201912011917108_right.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

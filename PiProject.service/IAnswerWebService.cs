@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PiProject.domain.serviceEntities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,6 @@ namespace PiProject.service
 	{
 		 void AddTestAnswerAff(int idCollaborator, int idEvaluationTest);
 		void AddAnswerToAff(int idCollaborator, int idEvaluationTest, int idQuestion, int idResponse);
-		void AddFeedbackToAnswer(int idCollaborator, int idEvaluationTest);
+		void AddFeedbackToAnswer(Feedback360 feedback);
 	}
 }

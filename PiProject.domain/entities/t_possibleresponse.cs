@@ -20,7 +20,9 @@ namespace PiProject.data
 
         public int? Pr_score { get; set; }
 
-        public int? criteria_Cr_ID { get; set; }
+		public int isRight { get; set; }
+
+		public int? criteria_Cr_ID { get; set; }
 
         public virtual t_criteria t_criteria { get; set; }
     }

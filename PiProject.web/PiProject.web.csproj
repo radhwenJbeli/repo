@@ -86,6 +86,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -217,6 +218,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Collaborator\CollaboratorModel.cs" />
+    <Compile Include="Models\Collaborator\DevelopperModel.cs" />
+    <Compile Include="Models\Collaborator\Feedback.cs" />
+    <Compile Include="Models\Collaborator\ManagerModel.cs" />
+    <Compile Include="Models\Collaborator\PerformanceModel.cs" />
+    <Compile Include="Models\Collaborator\WarningListModel.cs" />
+    <Compile Include="Models\Collaborator\WarningModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Login\LoggerModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -296,6 +304,10 @@
     <Content Include="Views\Collaborator\NextQuestion.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Collaborator\InfosOfAnswers.cshtml" />
+    <Content Include="Views\Collaborator\AddFeedback.cshtml" />
+    <Content Include="Views\Collaborator\Warnings.cshtml" />
+    <Content Include="Views\Manager\Dashboard.cshtml" />
+    <Content Include="Views\Manager\Warnings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -24,7 +24,9 @@ namespace PiProject.data
         [Column(TypeName = "bit")]
         public bool? isAnswered { get; set; }
 
-        public virtual t_collaborator t_collaborator { get; set; }
+		
+
+		public virtual t_collaborator t_collaborator { get; set; }
 
         public virtual t_evaluationtest t_evaluationtest { get; set; }
     }

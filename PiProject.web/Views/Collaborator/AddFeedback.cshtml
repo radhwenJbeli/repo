@@ -1,0 +1,38 @@
+﻿@model PiProject.web.Models.Collaborator.Feedback
+@{
+    ViewBag.Title = "AddFeedback";
+}
+
+<h2>AddFeedback</h2>
+
+<p>  you put here your feedback </p>
+@if (Model.isBad==false)
+{
+	using (Html.BeginForm("AnswerWithFeedback", "Collaborator", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+	{
+		@Html.TextBoxFor(m => m.title, new { @class = "form-control" })
+		@Html.TextAreaFor(m => m.content, new { @class = "form-control" })
+
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="confirm answers with feedback" class="btn btn-default" />
+			</div>
+		</div>
+		<p></p>
+
+	}
+}
+else{
+	<p> you are going to harm the subject of this test </p>
+	using (Html.BeginForm("ConfirmAnswerWithFeedback", "Collaborator", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+	{
+		@Html.ActionLink("collaborator", "ConfirmAnswerWithFeedback", Model)
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+				<input type="submit" value="confirm answers with feedback" class="btn btn-default" />
+			</div>
+		</div>
+	}
+}
+
+@Html.ActionLink("abandon all", "AbandonAnswers")

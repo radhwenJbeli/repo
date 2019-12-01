@@ -1,9 +1,35 @@
-﻿
+﻿@model PiProject.web.Models.Collaborator.CollaboratorModel
 @{
     ViewBag.Title = "Dashboard";
 }
 
+
+
+
+
+
+
 <h2>Dashboard collaborator</h2>
+<p> votre nom est : @Model.C_Forname @Model.C_Lastname</p>
+
+<p> le nom du superviseur est :  @Model.superviser.C_Lastname  @Model.superviser.C_Forname</p>
+<p> la performance Auto est :@Model.performance.gloabalAutoNote</p>
+<p> votre rank Auto est : @Model.performance.RankingAuto</p>
+<p>la performance 360 est : @Model.performance.global360Note</p>
+<p> votre rank 360 est : @Model.performance.Ranking360</p>
+
+<p> votre global performance est :  @Model.performance.globalPerformance</p>
+<p> votre global rank est : @Model.performance.globalRanking</p>
+
+
+
+
+@Html.ActionLink("display Warnings", "DisplayWarnings")
+
+
+
 @Html.ActionLink("DisplayAuto", "AutoTests")
 <p></p>
 @Html.ActionLink("DisplayInvitations", "Tests360")
+
+@Html.ActionLink("Deconnect", "Deconnect")

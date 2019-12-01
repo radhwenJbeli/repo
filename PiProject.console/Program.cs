@@ -69,8 +69,9 @@ namespace PiProject.console
 			*/
 
 			// 3 ) test new relations 
-			TestService t = new TestService();
-			t.TestRelation();
+			//TestService t = new TestService();
+			//t.TestRelation();
+
 
 			// ) test feedback 
 			/*	List<String> BadWordsDictionnary = new List<string>();
@@ -83,7 +84,33 @@ namespace PiProject.console
 				var res = ser.VerifyNegativityOfFeedback(fe,BadWordsDictionnary);
 			*/
 
-			
+			//test SetEvaluationAffectationStateToAnswered web method 
+			//AnswerWebService sr = new AnswerWebService();
+			//sr.SetEvaluationAffectationStateToAnswered(11, 19);
+
+			/*	HttpClient client = new HttpClient();
+				client.BaseAddress = new Uri("http://localhost:8080/PiProject-web/");
+				client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+				HttpResponseMessage response = client.GetAsync("api/answer/24").Result;
+				if (response.IsSuccessStatusCode)
+				{
+					Task<List<CollaboratorSr>> t = response.Content.ReadAsAsync<List<CollaboratorSr>>();
+					var a = t.Result;
+				}
+				else
+				{
+
+				}
+
+			*/
+			//CollaboratorService sr = new CollaboratorService();
+			//sr.IncrementBadFeedbackCountForCollaborator(16);
+
+			//AnswerWebService wb = new AnswerWebService();
+			//wb.RecalculateRank();
+			PiServices sr = new PiServices();
+			sr.VerifyRank360(16);
+
 		}
 	}
 }

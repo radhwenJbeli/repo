@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="entities\Gravity.cs" />
     <Compile Include="entities\t_ranking.cs" />
     <Compile Include="entities\TestWrapper.cs" />
     <Compile Include="entities\t_answerobject.cs" />
@@ -98,6 +99,8 @@
     <Compile Include="serviceEntities\AnswerObject.cs" />
     <Compile Include="serviceEntities\CollaboratorSr.cs" />
     <Compile Include="serviceEntities\Feedback360.cs" />
+    <Compile Include="utilities\BadWordDictionnary.cs" />
+    <Compile Include="utilities\GlobalNoteCoefficients.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

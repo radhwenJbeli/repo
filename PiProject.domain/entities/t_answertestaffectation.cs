@@ -27,10 +27,12 @@ namespace PiProject.data
 
         public DateTime? dateAnswer { get; set; }
 
-        [Column(TypeName = "bit")]
-        public bool isAnswered { get; set; }
+		  [Column(TypeName = "bit")]
+		  public bool isAnswered { get; set; }
+  
+		
 
-        public float scoreCalculated { get; set; }
+		public float scoreCalculated { get; set; }
 
         public int? feedback_F_ID { get; set; }
 
