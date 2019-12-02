@@ -1,7 +1,51 @@
-﻿
+﻿@using PiProject.web.Models.Collaborator
+@using PiProject.domain.entities
+@model PiProject.web.Models.Collaborator.WarningListModel
 @{
     ViewBag.Title = "Warnings";
 }
 
 <h2>Warnings</h2>
 
+
+
+
+<div id="warnings_manager">
+	<h3> warnings of manage </h3>
+	<div id="warningsTable">
+		<table class="table table-condensed" id="catalogIndexTable">
+			<thead>
+				<tr>
+					
+					<th> content </th>
+					<th> reason </th>
+					<th> gravity </th>
+					<th> request contest test</th>
+					
+
+				</tr>
+
+
+			</thead>
+			<tbody>
+				@foreach (var w in Model.list)
+				{
+					<tr class="assetRow">
+						
+						<td class="">@w.Content</td>
+						<td class="">@w.Reason</td>
+						<td class="">@w.gravity</td>
+						
+						@if(w.gravity.Equals(Gravity.serious))
+						{
+						<td class="">@Html.ActionLink("requestContestTest", "requestContestTest", new { id = w.WId }) </td>
+						}
+					</tr>
+
+				}
+
+			</tbody>
+		</table>
+	</div>
+</div>
+>@Html.ActionLink("BackToDashboard", "BackToDashboard")

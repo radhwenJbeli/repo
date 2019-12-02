@@ -1,4 +1,5 @@
 ﻿using PiProject.data;
+using PiProject.domain.entities;
 using PiProject.domain.serviceEntities;
 using PiProject.domain.utilities;
 using PiProject.service;
@@ -59,13 +60,15 @@ namespace PiProject.web.Controllers.collaborator
 
 			Getlogger();
 
+
+			t_collaborator co = _pi.GetCollaborator(logger.C_ID);
 			CollaboratorModel model;
 			if (logger.t_developper != null)
 			{
-				 model = initCollaborator(); 
+				 model = initCollaborator(co); 
 			}
 			else {
-				model = initCollaborator();
+				model = initCollaborator(co);
 				//ajouter ici les features du manager 
 			}
 
@@ -77,7 +80,7 @@ namespace PiProject.web.Controllers.collaborator
 
 
 		[NonAction]
-		public CollaboratorModel initCollaborator()
+		public CollaboratorModel initCollaborator(t_collaborator c)
 		{
 			CollaboratorModel collab;
 			
@@ -86,26 +89,26 @@ namespace PiProject.web.Controllers.collaborator
 
 				////////////////////superviser//////////////// 
 				ManagerModel superviser = new ManagerModel();
-				superviser.C_Forname = logger.superViser.t_collaborator.C_Forname;
-				superviser.C_Lastname = logger.superViser.t_collaborator.C_Lastname;
+				superviser.C_Forname = c.superViser.t_collaborator.C_Forname;
+				superviser.C_Lastname = c.superViser.t_collaborator.C_Lastname;
 				collab.superviser = superviser;
 				/////////////////////////////////////////////////////
 
 
-				collab.C_Age = logger.C_Age;
-				collab.C_email = logger.C_email;
-				collab.C_Forname = logger.C_Forname;
-				collab.C_Lastname = logger.C_Lastname;
+				collab.C_Age = c.C_Age;
+				collab.C_email = c.C_email;
+				collab.C_Forname = c.C_Forname;
+				collab.C_Lastname = c.C_Lastname;
 
 				//performance notes //////////////////////
 				PerformanceModel perf = new PerformanceModel();
-				perf.gloabalAutoNote = logger.t_performancenote.ElementAt(0).gloabalAutoNote;
-				perf.global360Note = logger.t_performancenote.ElementAt(0).global360Note;
-				perf.globalPerformance = logger.t_performancenote.ElementAt(0).globalPerformance;
+				perf.gloabalAutoNote = c.t_performancenote.ElementAt(0).gloabalAutoNote;
+				perf.global360Note = c.t_performancenote.ElementAt(0).global360Note;
+				perf.globalPerformance = c.t_performancenote.ElementAt(0).globalPerformance;
 				//rankkkkkkkkkkkkkkkk/////////////////
-				perf.RankingAuto = logger.t_performancenote.ElementAt(0).rank.RankingAuto;
-				perf.Ranking360 = logger.t_performancenote.ElementAt(0).rank.Ranking360;
-				perf.globalRanking = logger.t_performancenote.ElementAt(0).rank.globalRanking;
+				perf.RankingAuto = c.t_performancenote.ElementAt(0).rank.RankingAuto;
+				perf.Ranking360 = c.t_performancenote.ElementAt(0).rank.Ranking360;
+				perf.globalRanking = c.t_performancenote.ElementAt(0).rank.globalRanking;
 
 				collab.performance = perf;
 				//////////////////////////////////////////////////////
@@ -115,9 +118,46 @@ namespace PiProject.web.Controllers.collaborator
 		}
 
 
+
+		//to implement
+		public ActionResult requestContestTest()
+		{
+			return null;
+		}
+
+
+
+
+		public ActionResult BackToDashboard()
+		{
+			return RedirectToAction("Dashboard", "Collaborator");
+		}
 		public ActionResult DisplayWarnings()
 		{
-			return View("Warnings"); 
+			Getlogger();
+
+			WarningModel warn;
+			List<Warning> warnings  =_pi.GetAllWarningsOfCollab(logger.C_ID);
+			List<WarningModel> warnList = new List<WarningModel>();
+			foreach (Warning w in warnings)
+			{
+				warn = new WarningModel();
+				warn.Reason = w.Reason;
+				warn.Content = w.Content;
+				warn.gravity = w.gravity;
+				warn.is_Confirmed = w.is_Confirmed;
+
+				CollaboratorModel Towarn = new CollaboratorModel();
+				Towarn.C_Forname = w.collab.C_Forname;
+				Towarn.C_Lastname = w.collab.C_Lastname;
+				warn.collabAffected = Towarn;
+
+				warnList.Add(warn);
+			}
+			WarningListModel listModel = new WarningListModel();
+			listModel.list = warnList;
+			var model = listModel;
+			return View("Warnings",model); 
 		}
 		public ActionResult ConfirmAnswers()
 		{
@@ -144,7 +184,32 @@ namespace PiProject.web.Controllers.collaborator
 			_an.RecalculateGlobalNote(targets);
 
 			// verfiy for possible warnings
+			var x = TestToAnswer.Type;
 
+			List<t_collaborator> targetList = _sr.GetTargetList(TestToAnswer.ID);
+
+
+			if (TestToAnswer.Type.Equals("PersonalEvaluation"))
+			{
+				//verify for possible warnings for targer list
+				foreach( t_collaborator target in targetList)
+				{
+					_pi.VerifyFeedback(logger.C_ID);
+					_pi.VerifyRank360(logger.C_ID);
+				}
+				
+				
+			}
+			if (TestToAnswer.Type.Equals("AutoEvaluation"))
+			{
+				//verify for possible warnings for targer list
+				foreach (t_collaborator target in targetList)
+				{
+					_pi.VerifyRankingAuto(logger.C_ID);
+				}
+
+				
+			}
 			return RedirectToAction("Dashboard", "Collaborator", null);
 
 		}
@@ -179,8 +244,15 @@ namespace PiProject.web.Controllers.collaborator
 				foreach(t_collaborator collab in targetList)
 				{
 					_sr.IncrementBadFeedbackCountForCollaborator(collab.C_ID);
+					//vérification de rank auto et nbre feedbacks for possible warning
+					_pi.VerifyFeedback(collab.C_ID);
+					_pi.VerifyRank360(collab.C_ID);
 				}
+
 			}
+
+			
+			
 
 			return RedirectToAction("Dashboard", "Collaborator", null);
 		}
@@ -196,6 +268,7 @@ namespace PiProject.web.Controllers.collaborator
 			List<String> dictionnary = BadWordDictionnary.GetDictionnary();
 			var res = _pi.VerifyNegativityOfFeedback(feed, dictionnary);
 
+			
 			if (res)
 			{
 				model.isBad = true;

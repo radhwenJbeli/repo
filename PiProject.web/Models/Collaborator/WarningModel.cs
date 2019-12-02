@@ -8,6 +8,7 @@ namespace PiProject.web.Models.Collaborator
 {
 	public class WarningModel
 	{
+		public int WId { get; set; }
 		public string Reason { get; set; }
 		
 		public string Content { get; set; }

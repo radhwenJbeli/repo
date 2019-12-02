@@ -47,6 +47,19 @@ namespace PiProject.web.Controllers.manager
 			return View();
 		}
 
+
+		public ActionResult confirmWarning(int id)
+		{
+			var e = id;
+			//confirmWarning in here
+			Warning w =  _pi.GetWarning(id);
+			w.is_Confirmed = 1;
+			_pi.UpdateWarning(w);
+
+
+			return RedirectToAction("DisplayWarnings", "Manager");
+		}
+
 		public ActionResult DisplayWarnings()
 		{
 
@@ -61,6 +74,7 @@ namespace PiProject.web.Controllers.manager
 				warn.Reason = w.Reason;
 				warn.Content = w.Content;
 				warn.gravity = w.gravity;
+				warn.WId = w.WId;
 
 				CollaboratorModel Towarn = new CollaboratorModel();
 				Towarn.C_Forname = w.collab.C_Forname;

@@ -313,6 +313,7 @@ namespace PiProject.service
 			return AverageNoteOfTest;
 		}
 
+		//vérifier la note auto de collaborateur si au dessus de moyenne
 		public int VerifyAuto(List<t_collaborator> targetList)
 		{
 			foreach(t_collaborator co in targetList)
@@ -331,16 +332,19 @@ namespace PiProject.service
 		public int VerifyNbrBadFeedbacks(t_collaborator c , int maxPermitted)
 		{
 			List<t_performancenote> notes = new List<t_performancenote>();
+			notes = c.t_performancenote.ToList();
 			int retour = 0;
-			foreach (t_performancenote note in notes)
-			{
-				if(note.NbreBadFeedbacks < maxPermitted)
+			var w = maxPermitted;
+
+			int j = notes.ElementAt(0).NbreBadFeedbacks;
+			
+				if(j < maxPermitted)
 				{
 					//il n'a pas encore atteint le maxpermitted
 					retour = 1;
 					
 				}
-				else if(note.NbreBadFeedbacks == maxPermitted)
+				else if(j == maxPermitted)
 				{
 					retour = 2;
 					//il  a exactement atteint le maxpermitted
@@ -354,7 +358,7 @@ namespace PiProject.service
 					
 				}
 				
-			}
+			
 			return retour;
 			
 			
@@ -368,6 +372,26 @@ namespace PiProject.service
 											.Where(w => w.ManagerId == idManager && w.is_Confirmed==0).ToList();
 
 			return ListOfManager;
+		}
+
+
+		public List<Warning> GetAllWarningsOfCollab(int idCollaborator)
+		{
+			List<Warning> AllList = _context.t_warning.ToList();
+			List<Warning> ListOfWarnings = AllList.Where(w => w.collab.C_ID == idCollaborator && w.is_Confirmed == 1).ToList();
+
+
+			return ListOfWarnings;
+		}
+
+		public void UpdateWarning(Warning warn)
+		{
+			_context.SaveChanges();
+		}
+		public Warning GetWarning(int idWarning)
+		{
+			Warning w = _context.t_warning.Where(w0 => w0.WId == idWarning).FirstOrDefault();
+			return w;
 		}
 
 		public t_collaborator GetCollaborator(int idCollaborator)

@@ -7,12 +7,42 @@
 
 <h2> confirm Warnings</h2>
 
-@foreach (var w in Model.list)
-{
-	<p> @w.Content</p>
-	<p> @w.Reason</p>
-	<p> @w.gravity</p>
-	<p> @w.is_Confirmed</p>
-}
+
+
+<div id="warnings_manager">
+	<h3> warnings of manage </h3>
+	<div id="warningsTable">
+		<table class="table table-condensed" id="catalogIndexTable">
+			<thead>
+				<tr>
+					<th> ToWarn </th>
+					<th> content </th>
+					<th> reason </th>
+					<th> gravity </th>
+					<th> is_confirmed </th>
+
+				</tr>
+
+
+			</thead>
+			<tbody>
+	@foreach (var w in Model.list)
+	{
+		<tr class="assetRow">
+			<td class=""> @w.collabAffected.C_Lastname @w.collabAffected.C_Forname </td>
+			<td class="">@w.Content</td>
+			<td class="">@w.Reason</td>
+			<td class="">@w.gravity</td>
+			<td class="">@w.is_Confirmed</td>
+			<td class="">@Html.ActionLink("confirmWarning", "confirmWarning", new { id = w.WId }) </td>
+		</tr>
+				
+	}
+
+			</tbody>
+		</table>
+	</div>
+</div>
+
 
 
