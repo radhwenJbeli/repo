@@ -2,10 +2,12 @@
 @model PiProject.web.Models.Collaborator.WarningListModel
 
 @{
-    ViewBag.Title = "Warnings";
+	ViewBag.Title = "Warnings";
+	Layout = "~/Views/Manager/_LayoutManagerDashboard.cshtml";
+	@Styles.Render("~/content/WarningsStyle.css")
 }
 
-<h2> confirm Warnings</h2>
+
 
 
 

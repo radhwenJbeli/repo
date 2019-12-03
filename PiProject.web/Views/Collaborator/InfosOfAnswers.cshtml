@@ -3,29 +3,39 @@
 @model PiProject.web.Models.Collaborator.TestToRender
 
 @{
-    ViewBag.Title = "InfosOfAnswers";
+	ViewBag.Title = "InfosOfAnswers";
+	Layout = "~/Views/Collaborator/_LayoutCollaboratorDashboard.cshtml";
 }
 
+@Styles.Render("~/content/InfosOfAnswersStyle.css")
 
 
 
-<h2>InfosOfAnswers</h2>
+<div class="render_body">
+	<div class="answers_infos">
+		<h2>InfosOfAnswers</h2>
 
 
-<p> vos réponses aux test @ViewData["test"] </p>
-@foreach(var inf in ViewData["infos"] as Dictionary<Question,PossibleResponse>)
-{
-	
-	<p> @inf.Key.Content</p>
-	<p> @inf.Value.ID</p>
-}
+		<p> vos réponses aux test @ViewData["test"] </p>
+		@foreach (var inf in ViewData["infos"] as Dictionary<Question, PossibleResponse>)
+		{
 
-@ViewBag.logger
-@if (Model.Type.Equals("PersonalEvaluation"))
-{
-	@Html.ActionLink("you want to add feedback ?", "AddFeedback")
-}
+			<p> @inf.Key.Content</p>
+			<p> @inf.Value.ID</p>
+		}
 
-@Html.ActionLink("confirm answers", "ConfirmAnswers")
-<p></p>
-@Html.ActionLink("abandon answers", "AbandonAnswers")
+		@ViewBag.logger
+		@if (Model.Type.Equals("PersonalEvaluation"))
+		{
+			@Html.ActionLink("you want to add feedback ?", "AddFeedback")
+		}
+
+		@Html.ActionLink("confirm answers", "ConfirmAnswers")
+		<p></p>
+		@Html.ActionLink("abandon answers", "AbandonAnswers")
+
+ 
+	</div>
+</div>
+
+

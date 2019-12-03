@@ -1,15 +1,58 @@
 ﻿@model PiProject.web.Models.Collaborator.RenderTestList
 
 @{
-    ViewBag.Title = "AutoTests";
+	ViewBag.Title = "AutoTests";
+	Layout = "~/Views/Collaborator/_LayoutCollaboratorDashboard.cshtml";
 }
 
-<h2>AutoTests</h2>
+@Styles.Render("~/content/CollaboratorTestStyle.css")
 
-@foreach (var test in Model.TestsList)
-{
-	<p> @test.ID</p>
-	@Html.ActionLink("Answer", "AnswerTest", new { id = test.ID })
 
-}
+<div class="message">
+	<p> you are affected to <span> @Model.TestsList.Count()</span> Auto Tests affected to you </p>
+</div>
+<div class="table_test">
+	<table class="table table-condensed" id="catalogIndexTable">
+		<thead>
+			<tr>
+				<th> Id</th>
+				<th> Test </th>
+				<th> Type </th>
+				<th> NbreQuestions </th>
+				<th> global Note </th>
+				<th> Nbre Participants </th>
+				<th> Answer </th>
+
+
+			</tr>
+
+
+		</thead>
+		<tbody>
+			@foreach (var test in Model.TestsList)
+			{
+				<tr class="assetRow">
+					<td class="">@test.ID</td>
+					<td class="">@test.Description</td>
+					<td class="">@test.tType</td>
+					<td class="">@test.NbreQuestions</td>
+					<td class="">@test.globaloNoteSoFar</td>
+					<td class="">@test.NbreParticipants</td>
+					<td class="buton"> @Html.ActionLink("Answer", "AnswerTest", new { id = test.ID }, new { @class = "btn btn-dark" })</td>
+				</tr>
+				
+			}
+
+		</tbody>
+	</table>
+
+
+
+
+
+
+
+
+</div>
+
 

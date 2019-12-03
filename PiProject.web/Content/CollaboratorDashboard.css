@@ -1,0 +1,47 @@
+﻿body {
+}
+h2{
+	color:red;
+}
+.performance_aside> p{
+	text-transform: uppercase;
+	text-shadow: 1px 1px dimgrey;
+	color:dimgrey;
+	padding-left:30px;
+	margin-top:20px;
+	margin-left:5px;
+	margin-right:10px;
+}
+.performance_aside> p span{
+	color:white;
+	padding-left:10px;
+	
+	
+}
+.section_title h3{
+	text-transform: capitalize;
+	background: #E66D56;
+	margin-top:0px;
+	padding-top:20px;
+	padding-left:40px;
+	padding-right:40px;
+	padding-bottom:20px;
+	margin-bottom:10px;
+
+}
+.bodyRender{
+	    position: relative;
+	margin-bottom: 150px;
+}
+.performance_aside{
+	 background-color: #e4e1dd;
+	display: inline-block;
+	position: relative;
+	padding-left:0px;
+	padding-right:0px;
+	padding-bottom: 20px;
+    padding-top: 0px;
+	    top: 20px;
+    left: 1008px;
+	   
+}

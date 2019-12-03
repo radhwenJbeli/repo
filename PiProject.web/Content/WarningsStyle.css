@@ -1,0 +1,13 @@
+﻿body {
+}
+#warnings_manager{
+	margin-top:50px;
+	margin-bottom: 200px;
+	margin-left:50px;
+	margin-right:50px;
+	border-style: solid;
+  border-width: 5px;
+}
+#warnings_manager> *{
+	margin-left:50px;
+}

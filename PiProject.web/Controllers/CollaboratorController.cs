@@ -316,6 +316,9 @@ namespace PiProject.web.Controllers.collaborator
 				render.Type = test.ET_Type;
 				render.tType = test.Et_tType;
 				render.globaloNoteSoFar = test.globaloNoteSoFar;
+				render.NbreQuestions = test.t_criteria.Count();
+				render.NbreParticipants = test.t_answertestaffectation.Count();
+				
 
 				render.questions = new List<Question>();
 
@@ -372,8 +375,27 @@ namespace PiProject.web.Controllers.collaborator
 				render.Type = test.ET_Type;
 				render.tType = test.Et_tType;
 				render.globaloNoteSoFar = test.globaloNoteSoFar;
+				render.NbreQuestions = test.t_criteria.Count();
+				render.NbreParticipants = test.t_answertestaffectation.Count();
 
 				render.questions = new List<Question>();
+
+				//add target list of the test 
+
+				render.targetList = new List<CollaboratorModel>();
+				CollaboratorModel colab;
+				
+				foreach(t_evaluationtargetaffectation aff in test.t_evaluationtargetaffectation)
+				{
+					colab = new CollaboratorModel();
+					t_collaborator target = aff.t_collaborator;
+					colab.C_Lastname = target.C_Lastname;
+					colab.C_Forname = target.C_Forname;
+					colab.C_ID = target.C_ID;
+					render.targetList.Add(colab);
+
+				}
+
 
 				//add the questions 
 				foreach (t_criteria c in test.t_criteria)

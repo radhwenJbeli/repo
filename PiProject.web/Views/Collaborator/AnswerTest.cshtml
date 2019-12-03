@@ -1,19 +1,32 @@
 ﻿@model PiProject.web.Models.Collaborator.Question 
 @{
-    ViewBag.Title = "AnswerTest";
+	ViewBag.Title = "AnswerTest";
+	Layout = "~/Views/Collaborator/_LayoutCollaboratorDashboard.cshtml";
 }
 
+@Styles.Render("~/content/AnswerTestStyle.css")
 <h2> answer the test </h2>
 
-@using (Html.BeginForm("NextQuestion","Collaborator"))
-{
-	<p> @Model.Content</p>
+<div class="render_body">
+	<div class="questions_form">
+		@using (Html.BeginForm("NextQuestion", "Collaborator"))
+		{
+			<p id="question"> @Model.Content</p>
+
+			<ul>
+				@foreach (var r in Model.PossibleResponses)
+				{
+				<li id="possible_response"> @Html.RadioButtonFor(model => model.chosenRep, r.ID) @r.Content </li>
+				
+				}
+			</ul>
+			
+			<input type="submit" value="NextQuestion" class="btn btn-default next_question" />
+			//@Html.ActionLink("NextQuestion", "NextQuestion")
+		}
+
+	</div>
+</div>
 
 
-	foreach (var r in Model.PossibleResponses)
-	{
-		@Html.RadioButtonFor(model => model.chosenRep, r.ID) @r.Content <br />
-	}
-	<input type="submit" value="NextQuestion" class="btn btn-default" />
-	//@Html.ActionLink("NextQuestion", "NextQuestion")
-}
+

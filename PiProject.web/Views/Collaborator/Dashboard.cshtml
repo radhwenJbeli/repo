@@ -1,7 +1,30 @@
 ﻿@model PiProject.web.Models.Collaborator.CollaboratorModel
 @{
-    ViewBag.Title = "Dashboard";
+	ViewBag.Title = "Dashboard";
+
+	Layout = "~/Views/Collaborator/_LayoutCollaboratorDashboard.cshtml";
 }
+@Styles.Render("~/content/CollaboratorDashboard.css")
+
+
+
+<div class="bodyRender">
+	<div class="performance_aside">
+		<div class="section_title">
+			<h3> votre Performance</h3>
+		</div>
+
+		<p> MR  <span>@Model.C_Forname @Model.C_Lastname</span></p>
+
+		<p> superviseur : <span> @Model.superviser.C_Lastname  @Model.superviser.C_Forname</span> </p>
+		<p> Note Auto : <span> @Model.performance.gloabalAutoNote</span> </p>
+		<p> Rank  Auto est :  <span> @Model.performance.RankingAuto</span> </p>
+		<p> Note 360 est : <span> @Model.performance.global360Note</span> </p>
+		<p> Rank 360 est :  <span> @Model.performance.Ranking360</span> </p>
+
+		<p> Note Globale est : <span> @Model.performance.globalPerformance</span> </p>
+		<p> Rank global est : <span> @Model.performance.globalRanking</span> </p>
+	</div>
 
 
 
@@ -9,27 +32,14 @@
 
 
 
-<h2>Dashboard collaborator</h2>
-<p> votre nom est : @Model.C_Forname @Model.C_Lastname</p>
-
-<p> le nom du superviseur est :  @Model.superviser.C_Lastname  @Model.superviser.C_Forname</p>
-<p> la performance Auto est :@Model.performance.gloabalAutoNote</p>
-<p> votre rank Auto est : @Model.performance.RankingAuto</p>
-<p>la performance 360 est : @Model.performance.global360Note</p>
-<p> votre rank 360 est : @Model.performance.Ranking360</p>
-
-<p> votre global performance est :  @Model.performance.globalPerformance</p>
-<p> votre global rank est : @Model.performance.globalRanking</p>
+</div>
 
 
 
 
-@Html.ActionLink("display Warnings", "DisplayWarnings")
 
 
 
-@Html.ActionLink("DisplayAuto", "AutoTests")
-<p></p>
-@Html.ActionLink("DisplayInvitations", "Tests360")
 
-@Html.ActionLink("Deconnect", "Deconnect")
+
+

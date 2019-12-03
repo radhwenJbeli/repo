@@ -28,7 +28,7 @@
 	
 	left:500px;
 }
-#login{
+.login{
 	float: right;
 	 border-radius: 18px 18px 18px 18px;
     background-color: #e66d56;

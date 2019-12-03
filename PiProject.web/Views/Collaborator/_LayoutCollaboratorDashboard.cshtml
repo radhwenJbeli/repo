@@ -17,15 +17,14 @@
 
 
 	@Styles.Render("~/Content/css")
-	@Styles.Render("~/content/ManagerLayout.css")
+	@Styles.Render("~/content/CollaboratorLayout.css")
 	@Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
 	<div class="top_bar">
 		<div class="container">
 			
-			
-			<button id="login" type="button" class="btn btn-dark"> log out </button>
+			@Html.ActionLink("Deconnect", "Deconnect", null, new { @class = "btn btn-dark login" })
 			
 		</div>
 	</div>
@@ -36,35 +35,48 @@
 			<li class="nav-item">
 				@Html.ActionLink("aceuuil", "Dashboard", null, new { @class = "nav-link" })
 			</li>
-			<li class="nav-item">
-				<a class="nav-link " href="#">Manage time sheets </a>
-			</li>
-
-			<li class="nav-item">
-				<a class="nav-link " href="#">Manage Missions </a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link active" href="#">Manage Tests </a>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Manage Warnings</a>
+			<li class="nav-nav-item dropdown">
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Display tests</a>
 				<div class="dropdown-menu">
 
-					@Html.ActionLink("Confirm Warnings", "DisplayWarnings", null, new { @class = "dropdown-item" })
-
+					@Html.ActionLink("360 Tests", "Tests360", null, new { @class = "dropdown-item" })
+					@Html.ActionLink("Auto Tests", "AutoTests", null, new { @class = "dropdown-item" })
 
 				</div>
+				
+			
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link " href="#"> myTeam </a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="#">Manage My team </a>
+				@Html.ActionLink("display Warnings", "DisplayWarnings", null, new { @class = "nav-link active" })
+				
 			</li>
+			<li class="nav-item">
+				<a class="nav-link " href="#"> Missions </a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link " href="#"> Formations </a>
+			</li>
+		
+			
 
 		</ul>
 
 		
 	</div>
 	
+
+
+	
+
+
+
+
     <div>
+
         @RenderBody()
     </div>
 
