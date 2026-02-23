@@ -1,0 +1,85 @@
+@Service
+@RequiredArgsConstructor
+public class DemandeMigrationService {
+
+    private final MongoTemplate mongoTemplate;
+    private final CollaborateurRepository collaborateurRepository;
+
+    public void migrateMentions() {
+
+        // 1️⃣ Query: demandes where at least one commentaire has String mentions
+        Query query = Query.query(
+                Criteria.where("commentaires")
+                        .elemMatch(
+                                Criteria.where("mentions.0").type(2) // 2 = String
+                        )
+        );
+
+        List<Demande> demandes = mongoTemplate.find(query, Demande.class);
+
+        if (demandes.isEmpty()) {
+            System.out.println("No documents to migrate.");
+            return;
+        }
+
+        MongoConverter converter = mongoTemplate.getConverter();
+        MongoCollection<Document> collection =
+                mongoTemplate.getCollection("demandes");
+
+        List<WriteModel<Document>> bulkUpdates = new ArrayList<>();
+
+        for (Demande demande : demandes) {
+
+            boolean modified = false;
+
+            for (DemandeCommentaire commentaire : demande.getCommentaires()) {
+
+                if (commentaire.getMentions() == null || commentaire.getMentions().isEmpty())
+                    continue;
+
+                // detect old format
+                Object first = commentaire.getMentions().get(0);
+
+                if (first instanceof String) {
+
+                    List<Collaborateur> newMentions = new ArrayList<>();
+
+                    for (Object obj : commentaire.getMentions()) {
+
+                        if (obj instanceof String matricule) {
+
+                            Collaborateur collab =
+                                    collaborateurRepository.findByMatricule(matricule);
+
+                            if (collab != null) {
+                                newMentions.add(collab);
+                            }
+                        }
+                    }
+
+                    commentaire.setMentions(newMentions);
+                    modified = true;
+                }
+            }
+
+            if (modified) {
+
+                // Convert fully to BSON Document using Spring converter
+                Document demandeDoc = new Document();
+                converter.write(demande, demandeDoc);
+
+                bulkUpdates.add(
+                        new ReplaceOneModel<>(
+                                Filters.eq("_id", demande.getId()),
+                                demandeDoc
+                        )
+                );
+            }
+        }
+
+        if (!bulkUpdates.isEmpty()) {
+            collection.bulkWrite(bulkUpdates);
+            System.out.println("Migration completed: " + bulkUpdates.size() + " documents updated.");
+        }
+    }
+}
